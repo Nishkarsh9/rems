@@ -50,3 +50,15 @@ ec2_name = "test-ec2"
 backend_region = "us-west-1"
 bucket         = "rems-temp"
 bucket_key     = "networking/terraform.tfstate"
+
+create_iam_instance_profile = true
+
+
+# Optional: do not prefix role name
+ec2_iam_role_use_name_prefix = false
+
+# Attach required IAM policies
+ec2_iam_role_policies = {
+  eks        = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+  iam        = "arn:aws:iam::aws:policy/IAMFullAccess"
+}
