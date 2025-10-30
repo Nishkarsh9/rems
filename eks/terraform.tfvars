@@ -1,7 +1,7 @@
-region             = "ap-southeast-2"
-name               = "eks-istio-cluster1"
-# bucket             = "gokwik-bucket"
-# network_bucket_key = "ot/wrapper/infra/env/dev/network/terraform.tfstate"
+region             = "us-west-1"
+name               = "rems-cluster1"
+bucket             = "rems-temp"
+network_bucket_key = "networking/terraform.tfstate"
 
 create_iam_role            = true
 create_node_iam_role       = true
@@ -69,11 +69,11 @@ node_security_group_tags = {
 }
 
 eks_managed_node_groups = {
-  eks-ng1 = {
+  olly-ng1 = {
     create                       = true
     kubernetes_version           = "1.31"
-    name                         = "eks-ng1"
-    subnet_ids                   = ["subnet-0b8efbaeb5f81d557" , "subnet-0f6eb2b3775931db8"]
+    name                         = "olly-ng1"
+    subnet_ids                   = ["subnet-06fd7ace7e41c652f" , "subnet-0231c74df1eecddc8"]
     ami_type                     = "AL2023_x86_64_STANDARD"
     instance_types               = ["t3.medium"]
     desired_size                 = 2
@@ -88,14 +88,14 @@ eks_managed_node_groups = {
     tag_specifications           = ["instance:Name=eks-ng1-instance,Environment=nonprod"]
     disk_size                    = 20
     iam_role_additional_policies = {}
-    tags                         = { Name = "eks-ng1-node", type = "on-demand" }
+    tags                         = { Name = "olly-ng1-node", type = "on-demand" }
   }
 
   on-demand-ng = {
     create                      = true
     kubernetes_version          = "1.31"
     name                        = "on-demand-ng"
-    subnet_ids                  = ["subnet-0b8efbaeb5f81d557" , "subnet-0f6eb2b3775931db8"]
+    subnet_ids                  = ["subnet-06fd7ace7e41c652f" , "subnet-0231c74df1eecddc8"]
     ami_type                    = "AL2023_x86_64_STANDARD"
     instance_types              = ["t3.medium"]
     desired_size                = 2
