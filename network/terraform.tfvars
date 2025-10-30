@@ -145,7 +145,7 @@ key_pair_name         = "rems-key"
 private_key_algorithm = "RSA"
 private_key_rsa_bits  = 4096
 public_key_path       = ""                                           # Leave blank if you're generating the key
-key_output_dir        = "/home/ubuntu/keys/" # Directory where PEM file will be saved
+key_output_dir        = "/home/ubuntu/keys" # Directory where PEM file will be saved
 
 env     = "prod"
 owner   = "nishkarsh"
