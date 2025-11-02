@@ -9,7 +9,7 @@ variable "name" {
 variable "region" {
   description = "AWS region where the resources will be created"
   type        = string
-  default     = "us-east-2"
+  default     = "us-east-2"  # Changed from us-west-1 to us-east-2
 }
 
 variable "tags" {
@@ -72,7 +72,7 @@ variable "eks_managed_node_groups" {
     create                       = optional(bool, true)
     kubernetes_version           = string
     name                         = string
-    subnet_ids                   = list(string)
+    subnet_ids                   = optional(list(string), [])
     ami_type                     = string
     instance_types               = list(string)
     desired_size                 = number
@@ -177,13 +177,36 @@ variable "node_security_group_additional_rules" {
 
 # # --------------------------
 # # Remote state / S3
-# variable "bucket" {
-#   description = "S3 bucket name for remote state storage"
-#   type        = string
-# }
+ variable "bucket" {
+   description = "S3 bucket name for remote state storage"
+   type        = string
+ }
 
-# variable "network_bucket_key" {
-#   description = "S3 key for the network remote state"
-#   type        = string
-#   default     = ""
-# }
+ variable "network_bucket_key" {
+   description = "S3 key for the network remote state"
+   type        = string
+   default     = ""
+ }
+
+variable "nodegroup_subnet_names" {
+  description = "Mapping of node group names to lists of subnet names used for those node groups"
+  type        = map(list(string))
+  default     = {}
+}
+
+variable "access_entries" {
+  description = "EKS access entries for IAM → Kubernetes access"
+  type = map(object({
+    principal_arn     = string
+    kubernetes_groups = list(string)
+
+    access_policies = map(object({
+      policy_arn = string
+      access_scope = object({
+        type       = string
+        namespaces = optional(list(string))
+      })
+    }))
+  }))
+  default = {}
+}
