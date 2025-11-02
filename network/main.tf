@@ -1,4 +1,3 @@
-
 module "alb_security_group" {
   for_each = var.enable_alb_sg ? { enabled = true } : {}
 
@@ -37,7 +36,7 @@ module "endpoint_security_group" {
 
 
 module "network" {
-  source = "git::https://github.com/OT-CLOUD-KIT/terraform-aws-network-skeleton.git"
+  source = "git::https://github.com/OT-CLOUD-KIT/terraform-aws-network-skeleton.git?ref=1.0.6"
   # VPC
   vpc_cidr             = var.vpc_cidr
   instance_tenancy     = var.instance_tenancy
