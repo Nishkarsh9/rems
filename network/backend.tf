@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket         = "rems-temp"
+    bucket         = "rems-tempp"
     key            = "networking/terraform.tfstate"
     region         = "us-west-1"
     dynamodb_table = "rems-lock"
