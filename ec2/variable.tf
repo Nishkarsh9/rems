@@ -1,4 +1,3 @@
-
 variable "ec2_name" {
   description = "Name to be used on EC2 instance created"
   type        = string
