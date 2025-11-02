@@ -3,7 +3,7 @@ region            = "us-west-1"
 availability_zone = "us-west-1a"
 create_eip        = true
 ebs_optimized     = true
-instance_type     = "t3.micro"
+instance_type     = "t2.medium"
 key_name          = "rems-key"
 create_key_pair   = false
 public_key_path   = "/home/ubuntu/keys/rems-key.pem"
@@ -48,9 +48,10 @@ instance_tags = {
 ec2_name = "test-ec2"
 
 backend_region = "us-west-1"
-bucket         = "rems-temp"
+bucket         = "rems-tempp"
 bucket_key     = "networking/terraform.tfstate"
 
+# Enable IAM instance profile creation
 create_iam_instance_profile = true
 
 
@@ -59,6 +60,13 @@ ec2_iam_role_use_name_prefix = false
 
 # Attach required IAM policies
 ec2_iam_role_policies = {
-  eks        = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  iam        = "arn:aws:iam::aws:policy/IAMFullAccess"
+  ssm = "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
+  iam = "arn:aws:iam::aws:policy/IAMReadOnlyAccess"
+  eks_full   = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+  eks_vpc    = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
+  cloudwatch = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
+  ec2_full   = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+  iam_full   = "arn:aws:iam::aws:policy/IAMFullAccess"
+  s3_readonly = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+  kms_full    = "arn:aws:iam::aws:policy/AWSKeyManagementServicePowerUser"
 }
